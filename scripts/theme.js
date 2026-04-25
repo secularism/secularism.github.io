@@ -1,8 +1,8 @@
 export const THEME_STORAGE_KEY = 'homepage-theme';
 
 const THEME_MAP = {
-  dark: 'dim',
-  light: 'lofi',
+  dark: 'dark',
+  light: 'light',
 };
 
 export function resolveInitialTheme(storage, mediaQueryList) {

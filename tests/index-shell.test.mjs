@@ -12,6 +12,10 @@ test('page title is secularism', () => {
   assert.match(indexHtml, /<title>\s*secularism\s*<\/title>/);
 });
 
+test('html uses CSS-supported initial theme attribute', () => {
+  assert.match(indexHtml, /<html[^>]+data-theme="dark"[^>]+data-mode="dark"/);
+});
+
 test('favicon points to custom svg asset', () => {
   assert.match(indexHtml, /<link[^>]+rel="icon"[^>]+href="\.\/assets\/favicon\.svg"/);
 });
@@ -33,5 +37,6 @@ test('hero contains static fallback copy in html', () => {
 
 test('index includes inline theme fallback script for file preview', () => {
   assert.match(indexHtml, /function mountInlineThemeFallback\(\)/);
+  assert.match(indexHtml, /const themeMap = \{\s*dark: 'dark', light: 'light'\s*\};/);
   assert.match(indexHtml, /button\.onclick = \(\) =>/);
 });
