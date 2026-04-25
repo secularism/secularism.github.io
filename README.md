@@ -1,24 +1,32 @@
 # secularism.github.io
 
-单页个人主页静态骨架，适合直接部署到 GitHub Pages。
+一个使用 Tailwind CSS 重构的单页个人主页，适合直接部署到 GitHub Pages。
 
 ## 当前能力
 
 - 单页锚点导航
-- 暗色 / 浅色主题切换
-- 项目、技术栈、联系方式 mock 数据
-- 为滚动动画、卡片翻转等后续增强预留 `data-animate` / `data-motion` 挂点
+- 深浅主题切换
+- Tailwind CSS + daisyUI 基础组件
+- 响应式适配
+- 轻量 hover / scroll / background motion
 
 ## 开发说明
 
 - 页面入口：`index.html`
-- 样式文件：`styles/site.css`
-- 数据与交互：`scripts/`
+- Tailwind 源文件：`src/tailwind.css`
+- 生成样式：`assets/app.css`
+- 交互逻辑：`scripts/`
 - 逻辑测试：`tests/`
 
 ## 本地验证
 
-运行：
+构建样式：
+
+```bash
+npm run build:css
+```
+
+运行测试：
 
 ```bash
 node --test

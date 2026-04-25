@@ -1,0 +1,111 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@layer base {
+  :root {
+    --bg-shift: 0px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-width: 320px;
+    font-family: Inter, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+    background:
+      radial-gradient(circle at 20% calc(0% + var(--bg-shift)), rgb(59 130 246 / 0.06), transparent 24rem),
+      radial-gradient(circle at 80% calc(10% + var(--bg-shift)), rgb(148 163 184 / 0.05), transparent 28rem),
+      color-mix(in srgb, var(--fallback-b1, oklch(var(--b1))) 98%, black 2%);
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgb(148 163 184 / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(148 163 184 / 0.06) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: radial-gradient(circle at center, black 25%, transparent 85%);
+    opacity: 0.38;
+  }
+
+  ::selection {
+    background: rgb(59 130 246 / 0.18);
+  }
+}
+
+@layer components {
+  .page-wrap {
+    @apply relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-gap {
+    @apply py-14 sm:py-20;
+  }
+
+  .section-title {
+    @apply text-3xl font-semibold tracking-tight text-base-content sm:text-4xl;
+  }
+
+  .section-kicker {
+    @apply text-xs font-semibold uppercase tracking-[0.24em] text-base-content/55;
+  }
+
+  .section-copy {
+    @apply mt-4 max-w-2xl text-sm leading-7 text-base-content/70 sm:text-base;
+  }
+
+  .subtle-card {
+    @apply card border border-base-300/70 bg-base-100/85 shadow-sm backdrop-blur transition-all duration-300;
+  }
+
+  .subtle-card:hover {
+    @apply -translate-y-1 border-base-content/15 shadow-md;
+  }
+
+  .link-quiet {
+    @apply inline-flex items-center gap-2 text-sm text-base-content/65 transition hover:text-base-content;
+  }
+
+  .nav-link {
+    @apply rounded-full px-3 py-2 text-sm text-base-content/60 transition hover:bg-base-200 hover:text-base-content;
+  }
+
+  .nav-link.is-active {
+    @apply bg-base-200 text-base-content;
+  }
+
+  .hero-badge {
+    @apply badge badge-outline gap-2 rounded-full border-base-300/80 bg-base-100/70 px-3 py-3 text-xs font-medium text-base-content/70;
+  }
+
+  .project-link {
+    @apply text-sm font-medium text-base-content/70 underline decoration-base-300 underline-offset-4 transition hover:text-base-content;
+  }
+
+  .theme-toggle-shell {
+    @apply btn btn-ghost btn-sm rounded-full border border-base-300/70 bg-base-100/85 px-3 text-base-content/70 hover:border-base-content/15 hover:bg-base-200 hover:text-base-content;
+  }
+}
+
+@layer utilities {
+  .is-enhanced [data-animate] {
+    opacity: 0.001;
+    transform: translateY(18px);
+    transition:
+      opacity 600ms ease,
+      transform 600ms ease;
+  }
+
+  .is-enhanced [data-animate].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .motion-hover {
+    @apply transition duration-300 hover:-translate-y-1;
+  }
+}

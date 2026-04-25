@@ -1,5 +1,10 @@
 export const THEME_STORAGE_KEY = 'homepage-theme';
 
+const THEME_MAP = {
+  dark: 'dim',
+  light: 'lofi',
+};
+
 export function resolveInitialTheme(storage, mediaQueryList) {
   const storedTheme = storage?.getItem?.(THEME_STORAGE_KEY);
 
@@ -19,12 +24,13 @@ export function nextTheme(currentTheme) {
 }
 
 export function applyTheme(root, theme) {
-  root?.setAttribute?.('data-theme', theme);
+  root?.setAttribute?.('data-mode', theme);
+  root?.setAttribute?.('data-theme', THEME_MAP[theme] ?? THEME_MAP.dark);
   return theme;
 }
 
 export function createThemeController({
-  root = document.body,
+  root = document.documentElement,
   storage = window.localStorage,
   mediaQueryList = window.matchMedia?.('(prefers-color-scheme: dark)'),
 } = {}) {
@@ -32,14 +38,16 @@ export function createThemeController({
 
   function syncButton(button) {
     if (!button) return;
+
     button.dataset.theme = currentTheme;
     button.setAttribute('aria-pressed', String(currentTheme === 'light'));
+
     const label = button.querySelector('[data-theme-label]');
 
     if (label) {
-      label.textContent = currentTheme === 'dark' ? '浅色' : '暗色';
+      label.textContent = currentTheme === 'dark' ? '切换浅色' : '切换深色';
     } else {
-      button.textContent = currentTheme === 'dark' ? '切换浅色' : '切换暗色';
+      button.textContent = currentTheme === 'dark' ? '切换浅色' : '切换深色';
     }
   }
 
@@ -55,7 +63,9 @@ export function createThemeController({
       if (button?.dataset.inlineThemeReady === 'true') {
         button.onclick = null;
       }
+
       setTheme(currentTheme, button);
+
       button?.addEventListener?.('click', () => {
         setTheme(nextTheme(currentTheme), button);
       });
